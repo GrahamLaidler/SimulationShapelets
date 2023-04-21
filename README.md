@@ -1,5 +1,7 @@
 # Simulation Shapelets
 
+[![DOI](https://zenodo.org/badge/631010467.svg)](https://zenodo.org/badge/latestdoi/631010467)
+
 This repository contains data and code used for a shapelet analysis of simulation trajectories.
 
 The following files should be used to run the analysis:
