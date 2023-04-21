@@ -50,11 +50,7 @@ seriesLRWrandom = load_object("dat/Breakdowns/LRW_random.jld2");
 seriesMRWrandom = load_object("dat/Breakdowns/MRW_random.jld2");
 
 
-#convert time units from minutes to hours
-for i in 1:length(seriesLRWrandom)
-    seriesLRWrandom[i][:,1] ./= 60
-    seriesMRWrandom[i][:,1] ./= 60
-end
+
 
 #create training and testing sets
 seriesLRWrandom_train = seriesLRWrandom[1:100];
