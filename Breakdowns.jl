@@ -13,11 +13,6 @@ MRWsd = std([seriesMRWcontrolled[i][end,2] for i in 1:length(seriesMRWcontrolled
 LRWmeanTP95CI = (LRWmeanTP-(1.96*LRWsd/sqrt(length(seriesLRWcontrolled))), LRWmeanTP+(1.96*LRWsd/sqrt(length(seriesLRWcontrolled))))
 MRWmeanTP95CI = (MRWmeanTP-(1.96*MRWsd/sqrt(length(seriesMRWcontrolled))), MRWmeanTP+(1.96*MRWsd/sqrt(length(seriesMRWcontrolled))))
 
-#convert time units from minutes to hours
-for i in 1:length(seriesLRWcontrolled)
-    seriesLRWcontrolled[i][:,1] ./= 60
-    seriesMRWcontrolled[i][:,1] ./= 60
-end
 
 #create training and testing sets
 seriesLRW_train = seriesLRWcontrolled[1:100];
