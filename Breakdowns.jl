@@ -21,19 +21,19 @@ seriesLRW_test = seriesLRWcontrolled[101:end];
 seriesMRW_test = seriesMRWcontrolled[101:end];
 
 #Find optimal shapelets
-LRWcontrolled_s₁ = FindShapelet(seriesLRW_train, seriesMRW_train, 45, 40:5:50, 2, shapeletrange = (26,34), Center=Opt(), Search=Class1())
-MRWcontrolled_s₂ = FindShapelet(seriesLRW_train, seriesMRW_train, 45, 40:5:50, 2, shapeletrange = (24,32), Center=Opt(), Search=Class2())
+LRWcontrolled_s₁ = FindShapelet(seriesLRW_train, seriesMRW_train, 45, 40:5:50, 2, shapeletrange = (26,34), LocInv=Yes(), Search=Class1())
+MRWcontrolled_s₂ = FindShapelet(seriesLRW_train, seriesMRW_train, 45, 40:5:50, 2, shapeletrange = (24,32), LocInv=Yes(), Search=Class2())
 save_object("res/Breakdowns/LRWcontrolled_s1.jld2", LRWcontrolled_s₁)
 save_object("res/Breakdowns/MRWcontrolled_s2.jld2", MRWcontrolled_s₂)
 
-traindists_s₁_LRW = [dist_shapelet_series(LRWcontrolled_s₁[1], seriesLRW_train[i], Center=Opt()) for i in 1:length(seriesLRW_train)];
-traindists_s₁_MRW = [dist_shapelet_series(LRWcontrolled_s₁[1], seriesMRW_train[i], Center=Opt()) for i in 1:length(seriesMRW_train)];
-traindists_s₂_LRW = [dist_shapelet_series(MRWcontrolled_s₂[1], seriesLRW_train[i], Center=Opt()) for i in 1:length(seriesLRW_train)];
-traindists_s₂_MRW = [dist_shapelet_series(MRWcontrolled_s₂[1], seriesMRW_train[i], Center=Opt()) for i in 1:length(seriesMRW_train)];
-testdists_s₁_LRW = [dist_shapelet_series(LRWcontrolled_s₁[1], seriesLRW_test[i], Center=Opt()) for i in 1:length(seriesLRW_test)];
-testdists_s₁_MRW = [dist_shapelet_series(LRWcontrolled_s₁[1], seriesMRW_test[i], Center=Opt()) for i in 1:length(seriesMRW_test)];
-testdists_s₂_LRW = [dist_shapelet_series(MRWcontrolled_s₂[1], seriesLRW_test[i], Center=Opt()) for i in 1:length(seriesLRW_test)];
-testdists_s₂_MRW = [dist_shapelet_series(MRWcontrolled_s₂[1], seriesMRW_test[i], Center=Opt()) for i in 1:length(seriesMRW_test)];
+traindists_s₁_LRW = [dist_shapelet_series(LRWcontrolled_s₁[1], seriesLRW_train[i], LocInv=Yes()) for i in 1:length(seriesLRW_train)];
+traindists_s₁_MRW = [dist_shapelet_series(LRWcontrolled_s₁[1], seriesMRW_train[i], LocInv=Yes()) for i in 1:length(seriesMRW_train)];
+traindists_s₂_LRW = [dist_shapelet_series(MRWcontrolled_s₂[1], seriesLRW_train[i], LocInv=Yes()) for i in 1:length(seriesLRW_train)];
+traindists_s₂_MRW = [dist_shapelet_series(MRWcontrolled_s₂[1], seriesMRW_train[i], LocInv=Yes()) for i in 1:length(seriesMRW_train)];
+testdists_s₁_LRW = [dist_shapelet_series(LRWcontrolled_s₁[1], seriesLRW_test[i], LocInv=Yes()) for i in 1:length(seriesLRW_test)];
+testdists_s₁_MRW = [dist_shapelet_series(LRWcontrolled_s₁[1], seriesMRW_test[i], LocInv=Yes()) for i in 1:length(seriesMRW_test)];
+testdists_s₂_LRW = [dist_shapelet_series(MRWcontrolled_s₂[1], seriesLRW_test[i], LocInv=Yes()) for i in 1:length(seriesLRW_test)];
+testdists_s₂_MRW = [dist_shapelet_series(MRWcontrolled_s₂[1], seriesMRW_test[i], LocInv=Yes()) for i in 1:length(seriesMRW_test)];
 save_object("res/Breakdowns/controlled_traindists_s1_LRW.jld2", traindists_s₁_LRW)
 save_object("res/Breakdowns/controlled_traindists_s1_MRW.jld2", traindists_s₁_MRW)
 save_object("res/Breakdowns/controlled_traindists_s2_LRW.jld2", traindists_s₂_LRW)
@@ -63,20 +63,20 @@ seriesLRWrandom_test = seriesLRWrandom[101:end];
 seriesMRWrandom_test = seriesMRWrandom[101:end];
 
 #Find optimal shapelets
-LRWrandom_s₁ = FindShapelet(seriesLRWrandom_train, seriesMRWrandom_train, 80, 70:5:90, 10, Center=Opt(), Search=Class1())
-MRWrandom_s₂ = FindShapelet(seriesLRWrandom_train, seriesMRWrandom_train, 80, 70:5:90, 10, Center=Opt(), Search=Class2())
+LRWrandom_s₁ = FindShapelet(seriesLRWrandom_train, seriesMRWrandom_train, 80, 70:5:90, 10, LocInv=Yes(), Search=Class1())
+MRWrandom_s₂ = FindShapelet(seriesLRWrandom_train, seriesMRWrandom_train, 80, 70:5:90, 10, LocInv=Yes(), Search=Class2())
 save_object("res/Breakdowns/LRWrandom_s1.jld2", LRWrandom_s₁)
 save_object("res/Breakdowns/MRWrandom_s2.jld2", MRWrandom_s₂)
 
 
-r_traindists_s₁_LRW = [dist_shapelet_series(LRWrandom_s₁[1], seriesLRWrandom_train[i], Center=Opt()) for i in 1:length(seriesLRWrandom_train)];
-r_traindists_s₁_MRW = [dist_shapelet_series(LRWrandom_s₁[1], seriesMRWrandom_train[i], Center=Opt()) for i in 1:length(seriesMRWrandom_train)];
-r_traindists_s₂_LRW = [dist_shapelet_series(MRWrandom_s₂[1], seriesLRWrandom_train[i], Center=Opt()) for i in 1:length(seriesLRWrandom_train)];
-r_traindists_s₂_MRW = [dist_shapelet_series(MRWrandom_s₂[1], seriesMRWrandom_train[i], Center=Opt()) for i in 1:length(seriesMRWrandom_train)];
-r_testdists_s₁_LRW = [dist_shapelet_series(LRWrandom_s₁[1], seriesLRWrandom_test[i], Center=Opt()) for i in 1:length(seriesLRWrandom_test)];
-r_testdists_s₁_MRW = [dist_shapelet_series(LRWrandom_s₁[1], seriesMRWrandom_test[i], Center=Opt()) for i in 1:length(seriesMRWrandom_test)];
-r_testdists_s₂_LRW = [dist_shapelet_series(MRWrandom_s₂[1], seriesLRWrandom_test[i], Center=Opt()) for i in 1:length(seriesLRWrandom_test)];
-r_testdists_s₂_MRW = [dist_shapelet_series(MRWrandom_s₂[1], seriesMRWrandom_test[i], Center=Opt()) for i in 1:length(seriesMRWrandom_test)];
+r_traindists_s₁_LRW = [dist_shapelet_series(LRWrandom_s₁[1], seriesLRWrandom_train[i], LocInv=Yes()) for i in 1:length(seriesLRWrandom_train)];
+r_traindists_s₁_MRW = [dist_shapelet_series(LRWrandom_s₁[1], seriesMRWrandom_train[i], LocInv=Yes()) for i in 1:length(seriesMRWrandom_train)];
+r_traindists_s₂_LRW = [dist_shapelet_series(MRWrandom_s₂[1], seriesLRWrandom_train[i], LocInv=Yes()) for i in 1:length(seriesLRWrandom_train)];
+r_traindists_s₂_MRW = [dist_shapelet_series(MRWrandom_s₂[1], seriesMRWrandom_train[i], LocInv=Yes()) for i in 1:length(seriesMRWrandom_train)];
+r_testdists_s₁_LRW = [dist_shapelet_series(LRWrandom_s₁[1], seriesLRWrandom_test[i], LocInv=Yes()) for i in 1:length(seriesLRWrandom_test)];
+r_testdists_s₁_MRW = [dist_shapelet_series(LRWrandom_s₁[1], seriesMRWrandom_test[i], LocInv=Yes()) for i in 1:length(seriesMRWrandom_test)];
+r_testdists_s₂_LRW = [dist_shapelet_series(MRWrandom_s₂[1], seriesLRWrandom_test[i], LocInv=Yes()) for i in 1:length(seriesLRWrandom_test)];
+r_testdists_s₂_MRW = [dist_shapelet_series(MRWrandom_s₂[1], seriesMRWrandom_test[i], LocInv=Yes()) for i in 1:length(seriesMRWrandom_test)];
 save_object("res/Breakdowns/random_traindists_s1_LRW.jld2", r_traindists_s₁_LRW)
 save_object("res/Breakdowns/random_traindists_s1_MRW.jld2", r_traindists_s₁_MRW)
 save_object("res/Breakdowns/random_traindists_s2_LRW.jld2", r_traindists_s₂_LRW)
