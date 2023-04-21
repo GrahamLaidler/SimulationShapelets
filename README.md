@@ -1,4 +1,4 @@
-# SimulationShapelets
+# Simulation Shapelets
 
 This repository contains data and code used for a shapelet analysis of simulation trajectories.
 
