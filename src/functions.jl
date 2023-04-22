@@ -242,7 +242,7 @@ function bestPossible(class1dists, class2dists, n1, n2)
     return maximum([bestPossible_try1, bestPossible_try2])
 end
 
-function FindShapelet(class1series, class2series, l, lrange, τ; shapeletrange=(0,class1series[1][end,1]), LocInv::LocInvMethod=Yes(), Search::SearchOver=All())  #current_gain=0.0 
+function FindShapelet(class1series, class2series, l, lrange, τ; shapeletrange=(0,class1series[1][end,1]-l), LocInv::LocInvMethod=Yes(), Search::SearchOver=All())  #current_gain=0.0 
     #l is the target length of shapelets to look for.
     #lrange is the full set of lengths to consider
     #τ is the time steps for shapelet start times
