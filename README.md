@@ -1,10 +1,7 @@
 # Simulation Shapelets
 
-<<<<<<< HEAD
-=======
-[![DOI](https://zenodo.org/badge/631010467.svg)](https://zenodo.org/badge/latestdoi/631010467)
+![DOI](https://zenodo.org/badge/631010467.svg)
 
->>>>>>> 05c5ff02b56c89473d55e55780b10da0133d1aec
 This repository contains data and code used for a shapelet analysis of simulation trajectories.
 
 The following files should be used to run the analysis:
