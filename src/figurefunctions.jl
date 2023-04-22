@@ -413,19 +413,19 @@ function Figure10()
     testdistsmulti_s₂_system1 = load_object("res/Multivariate/testdistsmulti_s2_system1.jld2")
     testdistsmulti_s₂_system2 = load_object("res/Multivariate/testdistsmulti_s2_system2.jld2")
 
-    S1 = plot(Multi_s₁[1][1][:,1], Multi_s₁[1][1][:,2].-minimum(Multi_s₁[1][1][:,2]), linetype=:steppost, lw=1.5, xlabel=L"t", ylim=(-0.3,6.2), xlim=(-0.3, 12), xticks=0:2:12, yticks=0:2:6, ylabel=L"s(t) - \min_u s(u)", color=:sienna1, label=L"s_A", xguidefontsize=8, yguidefontsize=8, tickfontsize=5, legendfontsize=5, legend=:right, dpi=600)
+    S1 = plot(Multi_s₁[1][1][:,1], Multi_s₁[1][1][:,2].-minimum(Multi_s₁[1][1][:,2]), linetype=:steppost, lw=1.5, xlabel=L"t", ylim=(-0.3,6.2), xlim=(-0.3, 12), xticks=0:2:12, yticks=0:2:6, ylabel=L"s(t) - \min_u s(u)", color=:sienna1, label=L"s_A", xguidefontsize=8, yguidefontsize=8, tickfontsize=6, legendfontsize=6, legend=:right, dpi=600)
     S1 = plot!(Multi_s₁[1][2][:,1], Multi_s₁[1][2][:,2].-minimum(Multi_s₁[1][2][:,2]), linetype=:steppost, linestyle=:dash, lw=1.5, color=:sienna1, label=L"s_B")
     S1 = plot!(Multi_s₁[1][3][:,1], Multi_s₁[1][3][:,2].-minimum(Multi_s₁[1][3][:,2]), linetype=:steppost, linestyle=:dot, lw=2, color=:sienna1, label=L"s_C")
     S1 = annotate!(6.0, 6.5, text(L"\mathbf{\textit{s}}_1", :black, 12))
-    S2 = plot(Multi_s₂[1][1][:,1], Multi_s₂[1][1][:,2].-minimum(Multi_s₂[1][1][:,2]), linetype=:steppost, lw=1.5, xlabel=L"t", ylim=(-0.3,6.2), xlim=(-0.3, 12), xticks=0:2:12, yticks=0:2:6, ylabel=L"s(t) - \min_u s(u)", color=:plum4, label=L"s_A", xguidefontsize=8, yguidefontsize=8, tickfontsize=5, legendfontsize=5, legend=:topright, dpi=600)
+    S2 = plot(Multi_s₂[1][1][:,1], Multi_s₂[1][1][:,2].-minimum(Multi_s₂[1][1][:,2]), linetype=:steppost, lw=1.5, xlabel=L"t", ylim=(-0.3,6.2), xlim=(-0.3, 12), xticks=0:2:12, yticks=0:2:6, ylabel=L"s(t) - \min_u s(u)", color=:plum4, label=L"s_A", xguidefontsize=8, yguidefontsize=8, tickfontsize=6, legendfontsize=6, legend=:topright, dpi=600)
     S2 = plot!(Multi_s₂[1][2][:,1], Multi_s₂[1][2][:,2].-minimum(Multi_s₂[1][2][:,2]), linetype=:steppost, linestyle=:dash, lw=1.5, color=:plum4, label=L"s_B")
     S2 = plot!(Multi_s₂[1][3][:,1], Multi_s₂[1][3][:,2].-minimum(Multi_s₂[1][3][:,2]), linetype=:steppost, linestyle=:dot, lw=2, color=:plum4, label=L"s_C")
     S2 = annotate!(6.0, 6.5, text(L"\mathbf{\textit{s}}_2", :black, 12))
-    scatter_test = scatter(testdistsmulti_s₁_system1, testdistsmulti_s₂_system1, color=:sienna1, alpha=0.5, ms=2, markerstrokewidth=0.1, label="system 1", xlabel=L"\tilde{dist}(\mathbf{\textit{s}}_1,\mathbf{\textit{y}})", ylabel=L"\tilde{dist}(\mathbf{\textit{s}}_2,\mathbf{\textit{y}})", legend=:topright, xguidefontsize=8, yguidefontsize=8, legendfontsize=4, tickfontsize=5, titlefontsize=8, dpi=600)
+    scatter_test = scatter(testdistsmulti_s₁_system1, testdistsmulti_s₂_system1, color=:sienna1, alpha=0.5, ms=2, markerstrokewidth=0.1, label="system 1", xlabel=L"\tilde{dist}(\mathbf{\textit{s}}_1,\mathbf{\textit{y}})", ylabel=L"\tilde{dist}(\mathbf{\textit{s}}_2,\mathbf{\textit{y}})", legend=:topright, xguidefontsize=8, yguidefontsize=8, legendfontsize=5, tickfontsize=6, titlefontsize=8, dpi=600)
     scatter_test = scatter!(testdistsmulti_s₁_system2, testdistsmulti_s₂_system2, color=:plum4, alpha=0.5, ms=2, markerstrokewidth=0.1, label="system 2")
     
-    final_plot = plot(S1, S2, scatter_test, layout=(1,3), margin=2mm, size=(600,150), dpi=600)
-
+    final_plot = plot(S1, S2, scatter_test, layout=(1,3), margin=3mm, size=(800,200), dpi=600)
+    return final_plot
 end
 
 
