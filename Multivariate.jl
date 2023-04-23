@@ -12,7 +12,7 @@ system2series_test = [system2series[i][101:1100] for i in 1:length(system2series
 
 #Univariate shapelets in each dimension
 IndepA_s₁ = FindShapelet(system1series_train[1], system2series_train[1], 11, 10:12, 2, LocInv=Yes(), Search=Class1())
-IndepA_s₂ = FindShapelet(system1series_train[1], system2series_train[1], 11, 10:12, 2, LocInv=Yes(), Search=Class1())
+IndepA_s₂ = FindShapelet(system1series_train[1], system2series_train[1], 11, 10:12, 2, LocInv=Yes(), Search=Class2())
 
 IndepB_s₁ = FindShapelet(system1series_train[2], system2series_train[2], 11, 10:12, 2, LocInv=Yes(), Search=Class1())
 IndepB_s₂ = FindShapelet(system1series_train[2], system2series_train[2], 11, 10:12, 2, LocInv=Yes(), Search=Class2())
@@ -55,10 +55,10 @@ save_object("res/Multivariate/testdistsC_s2_system2.jld2", testdistsC_s₂_syste
 
 
 #Multivariate Shapelets
-Multi_s₁ = MultiDepShapelet(system1series_train, system2series_train, 11, 10:12, 2, LocInv=Yes(), Search=Class1())
+Multi_s₁ = MultiDepShapelet(system1series_train, system2series_train, 11, 10:12, 10, LocInv=Yes(), Search=Class1())
 save_object("res/Multivariate/Multi_s1.jld2", Multi_s₁)
 
-Multi_s₂ = MultiDepShapelet(system1series_train, system2series_train, 11, 10:12, 2, LocInv=Yes(), Search=Class2())
+Multi_s₂ = MultiDepShapelet(system1series_train, system2series_train, 11, 10:12, 10, LocInv=Yes(), Search=Class2())
 save_object("res/Multivariate/Multi_s2.jld2", Multi_s₂)
 
 testdistsmulti_s₁_system1 = [multidep_dist_shapelet_series(Multi_s₁[1], [system1series_test[d][i] for d in 1:length(system1series_test)], LocInv=Yes())[1] for i in 1:length(system1series_test[1])]
