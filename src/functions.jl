@@ -259,7 +259,7 @@ function FindShapelet(class1series, class2series, l, lrange, τ; shapeletrange=(
     best_gain = 0.0 
     shapelet_meandist = 0.0  
     shapelet_threshold = 0.0
-    best_shapelet = searchseries[1]
+    best_shapelet = vcat(searchseries[1][1:(argmin(searchseries[1][:,1] .<= l)-1),:], [l searchseries[1][argmin(searchseries[1][:,1] .< l)-1, 2]])
     perfect_gain = OptimalGain(zeros(length(class1series)), ones(length(class2series)))  #if we find a shapelet with perfect information gain, we will stop the search
     @showprogress "Shapelets Search: " for i in 1:length(searchseries)
         for j in shapeletrange[1]:τ:shapeletrange[2]
