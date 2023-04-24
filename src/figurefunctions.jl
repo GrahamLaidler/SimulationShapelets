@@ -253,7 +253,7 @@ end
 
 function Figure6()
     t = 0.01:0.01:10
-    arrivalrates = plot(t, (sin.(2*pi*t/10)./2).+0.5, color=:mediumseagreen, linewidth=2, xlabel=L"t", ylabel=L"\lambda(t)", label="true", yticks=0:0.5:1, xticks=0:5:10, dpi=600, size=(300,300),legend=:topright, xguidefontsize=8, yguidefontsize=8, legendfontsize=8, margins=2mm)
+    arrivalrates = plot(t, (sin.(2*pi*t/10)./2).+0.5, color=:mediumseagreen, linewidth=2, xlabel=L"t", ylabel=L"\lambda(t)", label="true", yticks=0:0.5:1, xticks=0:5:10, dpi=600, size=(300,300),legend=:topright, tickfontsize=6, xguidefontsize=8, yguidefontsize=8, legendfontsize=8, margins=2mm)
     arrivalrates = plot!([0,5],[1,1], color=:plum4, linewidth=2,label="")
     arrivalrates = plot!([5,10],[0,0], color=:plum4, linewidth=2,label="model 1")
     arrivalrates = plot!([0,(10/(2*pi))*asin(0.5)],[0.5,0.5], color=:sienna1, linestyle=:dash, linewidth=2,label="")
