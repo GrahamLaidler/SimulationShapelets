@@ -130,7 +130,7 @@ function Figure2()
     series_plot = plot!(shapelet[:,1], shapelet[:,2], linetype=:steppost, linewidth=2, color=:mediumseagreen, label=L"s")
     series_plot = plot!(twinx(),shapelet[:,1], shapelet[:,2], xlim=(0,25), ylim=(-0.2,6), ylabel=L"s(t)", tickfontsize=6, xticks=:none, label=:none, linetype=:steppost, linewidth=1, color=:mediumseagreen)
 
-    sampfreq_plot = scatter([distance_samplings[i][:,1] for i in 1:2], [distance_samplings[i][:,2] for i in 1:2], ms=3, markerstrokewidth=0.5, thickness_scaling=1, color=[:plum4 :sienna1], legend=:topright, label=[L"Z_1" L"Z_2"], xlabel="sampling frequency", ylabel=L"dist(S,Z)", tickfontsize=6, xguidefontsize=10, yguidefontsize=10, legendfontsize=8, margins=3mm, size=(800,200), dpi=600)
+    sampfreq_plot = scatter([distance_samplings[i][:,1] for i in 1:2], [distance_samplings[i][:,2] for i in 1:2], ms=3, markerstrokewidth=0.5, thickness_scaling=1, color=[:plum4 :sienna1], legend=:topright, label=[L"Z_1" L"Z_2"], xlabel="sampling frequency", ylabel=L"\mathrm{dist}(S,Z)", tickfontsize=6, xguidefontsize=10, yguidefontsize=10, legendfontsize=8, margins=3mm, size=(800,200), dpi=600)
     sampfreq_plot = plot!([distance_samplings[i][:,1] for i in 1:2], [distance_samplings[i][:,2] for i in 1:2], ms=3, color=[:plum4 :sienna1], label=:none)
 
     final_plot = plot(series_plot, sampfreq_plot, layout=(2,1), size=(800,450), margins=3mm)
