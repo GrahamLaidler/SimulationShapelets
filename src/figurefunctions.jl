@@ -76,7 +76,7 @@ function distEuclid_shapelet_series(shapelet, series)
     #This function calculates the distance between a shapelet and a series using Euclidean distance in the time series setting. No z-normalisation
     #Used for Figure 2
     ℓ = length(shapelet)
-    smallest_dist = norm(shapelet - series[1:ℓ])^2
+    smallest_dist = sum((shapelet .- series[1:ℓ]).^2)
     position = 1
     for i in 2:(length(series)-ℓ+1)
         test_dist = 0
