@@ -1,13 +1,9 @@
-using XLSX,
-    Random,
+using Random,
     LaTeXStrings,
-    #KernelDensity,
     Plots.Measures,
     JLD2,
     StatsPlots,
-    LinearAlgebra,
     StatsBase,
-    #InvertedIndices,
     Distributions,
     ProgressMeter
 
