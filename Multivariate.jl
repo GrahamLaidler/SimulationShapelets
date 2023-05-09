@@ -56,16 +56,16 @@ save_object("res/Multivariate/testdistsC_s2_system2.jld2", testdistsC_s₂_syste
 
 
 ####Find optimal multivariate shapelets####
-Multi_s₁ = MultiDepShapelet(system1series_train, system2series_train, 11, 10:12, 10, LocInv=Yes(), Search=Class1())
-Multi_s₂ = MultiDepShapelet(system1series_train, system2series_train, 11, 10:12, 10, LocInv=Yes(), Search=Class2())
+Multi_s₁ = MultiFindShapelet(system1series_train, system2series_train, 11, 10:12, 10, LocInv=Yes(), Search=Class1())
+Multi_s₂ = MultiFindShapelet(system1series_train, system2series_train, 11, 10:12, 10, LocInv=Yes(), Search=Class2())
 save_object("res/Multivariate/Multi_s1.jld2", Multi_s₁)
 save_object("res/Multivariate/Multi_s2.jld2", Multi_s₂)
 
 #Calculate distances from the optimal shapelets to the training and testing trajectories for scatter plots
-testdistsmulti_s₁_system1 = [multidep_dist_shapelet_series(Multi_s₁[1], [system1series_test[d][i] for d in eachindex(system1series_test)], LocInv=Yes())[1] for i in eachindex(system1series_test[1])]
-testdistsmulti_s₁_system2 = [multidep_dist_shapelet_series(Multi_s₁[1], [system2series_test[d][i] for d in eachindex(system2series_test)], LocInv=Yes())[1] for i in eachindex(system2series_test[1])]
-testdistsmulti_s₂_system1 = [multidep_dist_shapelet_series(Multi_s₂[1], [system1series_test[d][i] for d in eachindex(system1series_test)], LocInv=Yes())[1] for i in eachindex(system1series_test[1])]
-testdistsmulti_s₂_system2 = [multidep_dist_shapelet_series(Multi_s₂[1], [system2series_test[d][i] for d in eachindex(system2series_test)], LocInv=Yes())[1] for i in eachindex(system2series_test[1])]
+testdistsmulti_s₁_system1 = [multi_dist_shapelet_series(Multi_s₁[1], [system1series_test[d][i] for d in eachindex(system1series_test)], LocInv=Yes()) for i in eachindex(system1series_test[1])]
+testdistsmulti_s₁_system2 = [multi_dist_shapelet_series(Multi_s₁[1], [system2series_test[d][i] for d in eachindex(system2series_test)], LocInv=Yes()) for i in eachindex(system2series_test[1])]
+testdistsmulti_s₂_system1 = [multi_dist_shapelet_series(Multi_s₂[1], [system1series_test[d][i] for d in eachindex(system1series_test)], LocInv=Yes()) for i in eachindex(system1series_test[1])]
+testdistsmulti_s₂_system2 = [multi_dist_shapelet_series(Multi_s₂[1], [system2series_test[d][i] for d in eachindex(system2series_test)], LocInv=Yes()) for i in eachindex(system2series_test[1])]
 save_object("res/Multivariate/testdistsmulti_s1_system1.jld2", testdistsmulti_s₁_system1)
 save_object("res/Multivariate/testdistsmulti_s1_system2.jld2", testdistsmulti_s₁_system2)
 save_object("res/Multivariate/testdistsmulti_s2_system1.jld2", testdistsmulti_s₂_system1)

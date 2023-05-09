@@ -1,5 +1,7 @@
 
 function MM1c(λ, μ, T, c, seed)
+    #This function simulates a capacitated M/M/1 queue 
+    #Used for Figures 1, 2, and 3
     #λ is the arrival rate
     #μ is the service rate
     #T is the total duration of the simulation
@@ -12,7 +14,6 @@ function MM1c(λ, μ, T, c, seed)
     Throughput = 0   #initialise the throughput series
     Arrivals = Vector{Float64}()   #initialise empty vector to contain arrival times
     WaitingTimes = 0.0   #initialise waiting times series
-    completions = 0   #Count throughput
 
     ArrivalEvent = Exponential(1/λ)   
     EitherEvent = Exponential(1/(λ+μ))
@@ -72,13 +73,15 @@ function Figure1()
 end
 
 function distEuclid_shapelet_series(shapelet, series)
-    l = length(shapelet)
-    smallest_dist = norm(shapelet - series[1:l])^2
+    #This function calculates the distance between a shapelet and a series using Euclidean distance in the time series setting. No z-normalisation
+    #Used for Figure 2
+    ℓ = length(shapelet)
+    smallest_dist = norm(shapelet - series[1:ℓ])^2
     position = 1
-    for i in 2:(length(series)-l+1)
+    for i in 2:(length(series)-ℓ+1)
         test_dist = 0
         j = 1
-        while test_dist < smallest_dist && j <= l
+        while test_dist < smallest_dist && j <= ℓ
             test_dist += (shapelet[j] - series[i+j-1])^2
             j += 1
         end
@@ -94,7 +97,7 @@ function Figure2()
     shapelet = MM1c(1,1,3,5,1)
     twoseries = [MM1c(1,1,20,5,17), MM1c(1,1,20,5,16)]
     m = twoseries[1][end,1]
-    l = shapelet[end,1]
+    ℓ = shapelet[end,1]
 
     distance_samplings = Vector{Array{Float64}}(undef, 0)
     sampling_range = 0.1:0.01:0.5
@@ -104,14 +107,14 @@ function Figure2()
         for freq in sampling_range
             seriesRegTimes = 0:freq:m
             seriesRegValues = zeros(length(seriesRegTimes))
-            for i in 1:length(seriesRegTimes)
+            for i in eachindex(seriesRegTimes)
                 place = argmax(j -> series[:,1][j], findall(x -> x<=seriesRegTimes[i], series[:,1]))
                 seriesRegValues[i] = series[place,2]
             end
             seriesReg = hcat(seriesRegTimes, seriesRegValues)
-            shapeletRegTimes = 0:freq:l
+            shapeletRegTimes = 0:freq:ℓ
             shapeletRegValues = zeros(length(shapeletRegTimes))
-            for i in 1:length(shapeletRegTimes)
+            for i in eachindex(shapeletRegTimes)
                 place = argmax(j -> shapelet[:,1][j], findall(x -> x<=shapeletRegTimes[i], shapelet[:,1]))
                 shapeletRegValues[i] = shapelet[place,2]
             end
@@ -124,7 +127,7 @@ function Figure2()
         push!(distance_samplings, distances_series)
     end
 
-    shapelet[:,1] .+= 21
+    shapelet[:,1] .+= 21 #to plot shapelet on the right hand side after the series
 
     series_plot = plot([twoseries[i][:,1] for i in 1:2], [twoseries[i][:,2] for i in 1:2], xlim=(0,25), ylim=(-0.2,6), xticks=0:5:20, linetype=:steppost, linewidth=2, legend=:topright, label=[L"y_1" L"y_2"], color=[:plum4 :sienna1], xlabel=L"t", ylabel=L"y(t)", tickfontsize=6, xguidefontsize=10, yguidefontsize=10, legendfontsize=8, margins=3mm, right_margin=10mm, size=(800,200), dpi=600)
     series_plot = plot!(shapelet[:,1], shapelet[:,2], linetype=:steppost, linewidth=2, color=:mediumseagreen, label=L"s")
@@ -149,7 +152,7 @@ function Figure3()
     series_combinedvalues = zeros(length(Times_combined))
     shapelet_combinedvalues = zeros(length(Times_combined))
     shapeletindices = Vector{Int64}()
-    for i in 1:length(series_combinedvalues)
+    for i in eachindex(series_combinedvalues)
         place1 = argmax(j -> series[:,1][j], findall(x -> x<=Times_combined[i], series[:,1]))
         series_combinedvalues[i] = series[place1,2]
         shapelet_combinedvalues[i] = series[place1,2]
@@ -172,7 +175,7 @@ function Figure3()
     seriesRegTimes = 0:0.2:9
     seriesRegValues = zeros(length(seriesRegTimes))
     shapeletindices = Vector{Int64}()
-    for i in 1:length(seriesRegTimes)
+    for i in eachindex(seriesRegTimes)
         place = argmax(j -> series[:,1][j], findall(x -> x<=seriesRegTimes[i], series[:,1]))
         seriesRegValues[i] = series[place,2]
         if seriesRegTimes[i] >= shapelet[1,1] && seriesRegTimes[i] <=shapelet[end,1]
@@ -182,14 +185,14 @@ function Figure3()
 
     shapeletRegTimes = shapelet[1,1]:0.2:shapelet[end,1]
     shapeletRegValues = zeros(length(shapeletRegTimes))
-    for i in 1:length(shapeletRegTimes)
+    for i in eachindex(shapeletRegTimes)
         place = argmax(j -> shapelet[:,1][j], findall(x -> x<=shapeletRegTimes[i], shapelet[:,1]))
         shapeletRegValues[i] = shapelet[place,2]
     end
 
     regsampling_plot = scatter(seriesRegTimes, seriesRegValues, markerstrokewidth=0.5, ms=3, color=:plum4, xlabel=L"i", ylabel=L"z_i", label=L"Z", xticks=(0:2:8, ["1","11","21","31","41"]), xguidefontsize=10, tickfontsize=6, yguidefontsize=10, legendfontsize=8, margins=2mm, ylim=(-0.2,6), size=(800,200), dpi=600)
     regsampling_plot = scatter!(shapeletRegTimes, shapeletRegValues, color=:mediumseagreen, markerstrokewidth=0.5, ms=3, label=L"S")
-    regsampling_plot = plot!([[shapeletRegTimes[i], shapeletRegTimes[i]] for i in 1:length(shapeletRegTimes)], [[shapeletRegValues[i], seriesRegValues[shapeletindices][i]] for i in 1:length(shapeletRegTimes)], lw=2, color=:mediumseagreen, alpha=0.5, label=:none, linestyle=:dash)
+    regsampling_plot = plot!([[shapeletRegTimes[i], shapeletRegTimes[i]] for i in eachindex(shapeletRegTimes)], [[shapeletRegValues[i], seriesRegValues[shapeletindices][i]] for i in eachindex(shapeletRegTimes)], lw=2, color=:mediumseagreen, alpha=0.5, label=:none, linestyle=:dash)
     regsampling_plot = plot!([shapeletRegTimes[1], shapeletRegTimes[1]], [shapeletRegValues[1], shapeletRegValues[1]], lw=2, color=:mediumseagreen, alpha=0.5, label=L"d(S,z_{11:21})", linestyle=:dash)
 
     final_plot = plot(regsampling_plot, series_shapelet_plot, layout=(2,1), link=:x, size=(800,450))
@@ -436,7 +439,7 @@ function Figure11()
     series_combinedvalues = zeros(length(Times_combined))
     shapelet_combinedvalues = zeros(length(Times_combined))
     shapeletindices = Vector{Int64}()
-    for i in 1:length(series_combinedvalues)
+    for i in eachindex(series_combinedvalues)
         place1 = argmax(j -> series[:,1][j], findall(x -> x<=Times_combined[i], series[:,1]))
         series_combinedvalues[i] = series[place1,2]
         shapelet_combinedvalues[i] = series[place1,2]
@@ -478,7 +481,7 @@ function Figure12()
     series_combinedvalues = zeros(length(Times_combined))
     shapelet_combinedvalues = zeros(length(Times_combined))
     shapeletindices = Vector{Int64}()
-    for i in 1:length(series_combinedvalues)
+    for i in eachindex(series_combinedvalues)
         place1 = argmax(j -> series[:,1][j], findall(x -> x<=Times_combined[i], series[:,1]))
         series_combinedvalues[i] = series[place1,2]
         shapelet_combinedvalues[i] = series[place1,2]
