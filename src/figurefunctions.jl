@@ -425,7 +425,7 @@ function Figure10()
     scatter_test = scatter(testdistsmulti_s₁_system1, testdistsmulti_s₂_system1, color=:sienna1, alpha=0.5, ms=2, markerstrokewidth=0.1, label=L"\textrm{system \ 1}", xlabel=L"\tilde{\mathrm{dist}}(\mathbf{\textit{s}}_1,\mathbf{\textit{y}})", ylabel=L"\tilde{\mathrm{dist}}(\mathbf{\textit{s}}_2,\mathbf{\textit{y}})", legend=:topright, xguidefontsize=10, yguidefontsize=10, legendfontsize=5, tickfontsize=6, titlefontsize=8, dpi=600)
     scatter_test = scatter!(testdistsmulti_s₁_system2, testdistsmulti_s₂_system2, color=:plum4, alpha=0.5, ms=2, markerstrokewidth=0.1, label=L"\textrm{system \ 2}")
     
-    final_plot = plot(S1, S2, scatter_test, layout=(1,3), margin=3mm, size=(800,200), dpi=600)
+    final_plot = plot(S1, S2, scatter_test, layout=(1,3), margin=3.75mm, size=(800,200), dpi=600)
     return final_plot
 end
 
