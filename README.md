@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/631010467.svg)](https://zenodo.org/badge/latestdoi/631010467)
 
-This repository contains data and code used for a shapelet analysis of simulation trajectories.
+This repository contains data and code used for a shapelet analysis of simulation trajectories. The methods and results are presented in the following paper: [Simulation shapelets: Comparing characteristics of time-dynamic trajectories](https://doi.org/10.1080/17477778.2024.2449033).
 
 To use, clone the repository. Refer to the [instructions](https://pkgdocs.julialang.org/v1.2/environments/#Using-someone-else's-project-1) for setting up Julia environments.
 
